@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh" class="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>LearnKu 终身编程者的知识社区
+    </title>
+    <link rel="shortcut icon" href="__IMG__/icon.png"/>
+    <!-- Styles -->
+  <link href="__CSS__/vendors.css" rel="stylesheet">
+  <link href="__CSS__/myself.css" rel="stylesheet">
+    <style type="text/css">
+        @font-face {
+            font-family: 'FontAwesome';
+            src:url('__FONT__/FontAwesome.eot');/* IE9*/
+            src:url('__FONT__/FontAwesome.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('__FONT__/FontAwesome.woff2') format('woff2'), /* chrome、firefox、opera、Safari, Android, iOS */
+            url('__FONT__/FontAwesome.woff') format('woff'), /* chrome、firefox */
+            url('__FONT__/FontAwesome.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+            url('__FONT__/FontAwesome.svg#uxFontAwesome') format('svg'); /* iOS 4.1- */
+        }
+    .userModel {
+          display:block;
+          text-align:left;
+          background:#fff;
+          border:none;
+          box-shadow: 1px 3px 3px 0 rgba(0,0,0,.2),1px 3px 15px 2px rgba(0,0,0,.2);
+          transform-origin:50% 25%;
+          border-radius:.28571429rem;
+          margin:30px auto;
+          padding:20px;
+      }
+      #navbox {
+        display:flex;
+        flex-direction: row;
+        margin-left:auto;        
+      }
+      .selected{
+        cursor:pointer;
+        background:rgba(0,0,0,.03) !important;
+        color:rgba(0,0,0,.95) !important;
+      }
+
+  </style>
+</head>
+
+<body class=" auth-register-form-page" style="color:#636b6f;background-color: rgba(240,242, 245)">
+
+    <style>
+
+        .ui.top.menu {
+            border-top: 4px solid #00b5ad;
+        }
+
+        .ui.fluid.search .results {
+            width: 550px;
+        }
+
+        @media  only screen and (max-width: 600px) {
+            .ui.container>.ui .icon .input {
+                height: 52px;
+                flex-direction: initial;
+                border
+                display: none!important;
+            }
+        }
+        @media  only screen and (max-width: 767px) {
+            .ui.top.menu > .ui.container {
+                height: 52px;
+                flex-direction: initial;
+            }
+        }
+        @media  only screen and (max-width: 450px) {
+            #navbox{
+                display:none !important;
+            }
+        }
+        @media  only screen and (max-width: 767px) {
+            .ui.fluid.category.search {
+                display:none !important;
+            }
+        }
+        @media  only screen and (max-width: 1000px) {
+            #li1,#li2,#li3,#li4 {
+                display:none!important;
+            }
+        }
+        @media  only screen and (max-width: 1200px) {
+            [class*="twelve wide"].column {
+                width: 70%!important;
+            }
+        }
+        /* 顶部导航栏 */
+        .ui.top.menu {
+            border-top: 4px solid #f4645f;
+        }
+
+        /* 右边导航栏顶部样式 */
+        .ui.top-color.segment:not(.inverted) {
+            border-top: 2px solid #f4645f;
+        }
+
+        /* 右边导航栏顶部样式 */
+        .ui.top-color.card:not(.inverted) {
+            border-top: 2px solid #f4645f;
+        }
+
+        a {
+            color: #1775cc;
+        }
+
+        a:hover, a:focus {
+            color: #0081f9;
+            transition: color .15s ease 0s;
+        }
+
+        /* 主要按钮 */
+
+        .ui.primary.buttons .button, .ui.primary.button {
+            background-color: #f4645f;
+            border-color: #f4645f;
+        }
+
+        /* 主要按钮选中状态 */
+        .ui.primary.buttons .button:hover, .ui.primary.button:hover, .ui.primary.button:focus, .ui.primary.buttons .button:focus{
+            background-color: #f4645f;
+            border-color: #f4645f;
+        }
+
+        /* 外框按钮 */
+        .ui.basic.primary.buttons .button, .ui.basic.primary.button {
+            color: #f4645f !important;
+            box-shadow: 0px 0px 0px 1px #f4645f inset !important;
+        }
+
+        /* 外框按钮选中状态 */
+        .ui.basic.primary.buttons .button:hover, .ui.basic.primary.button:hover {
+            color: #f4645f !important;
+            box-shadow: 0px 0px 0px 1px #f4645f inset !important;
+        }
+        .ui.basic.primary.buttons .button:active, .ui.basic.primary.button:active, .ui.basic.primary.buttons .active.button, .ui.basic.primary.active.button, .ui.basic.buttons .button:hover, .ui.basic.button:hover,.ui.basic.primary.buttons .button:focus, .ui.basic.primary.button:focus {
+            color: #f4645f !important;
+            box-shadow: 0px 0px 0px 1px #f4645f inset !important;
+        }
+
+        
+        .footer {
+            max-height: max-content;
+        }
+        #navbox a
+    </style>
+
+<div class="pusher"  style="margin-bottom:30px;"> 
+
+    <div class="main container">
+
+        <nav class="ui main borderless menu top" id="topnav">
+            <div class="ui container" style="height:40px">
+                <div class="item">
+                    <img class="ui image" style="width:26px;height:26px;margin-top:-2px;" src="__IMG__/laravel.png">
+                    <span class="site-name ml-2 ">Laravel</span>
+                </div>
+
+        <form class="ui fluid category search item secondary hide-on-991" action="https://learnku.com/search" method="GET">
+          <div class="ui icon input">
+            <input class="prompt" name="q" type="text" placeholder="搜索" value="">
+            <i class="search icon"></i>
+        </div>
+        <div class="results"></div>
+    </form>
+    <!-- 1803010136 顶部导航栏 -->
+    <ul id="navbox">
+        <li><a href="{:url('index/index')}" class="item secondary">首页</a></li>
+        <li id = "forumPage"> <a   href="{:url('index/view')}" class="item secondary">论坛</a>
+            <ul class = 'setList'>
+                {volist name="section" id="sectionItem"}
+                    <li><a href="{:url('index/view')}">{$sectionItem.s_name}</a></li>
+                {/volist}
+            </ul>
+        </li>
+        <li > <a href="{:url('index/changepa')}" class="item secondary selected">社区</a></li>
+        <li><a href="{:url('index/me')}" class="item secondary">Wiki</a></li>
+        <li><a href="{:url('user/contact')}" class="item secondary">教程</a></li>
+        <li><a href="{:url('index/me')}" class="item secondary">上传头像</a></li>
+        <li id="li4"> <a href="{:url('user/login')}" class="item secondary">登录</a></li>
+        <li id="li3"><a href="{:url('user/reg')}" class="item secondary">注册</a></li>
+        <li id="li2"><a href="{:url('index/logout')}" class="item secondary">注销</a></li>
+
+        <li id = "li1" class="item secondary">
+            {if session('name') }
+            欢迎用户: <?=session('name');?>
+            <img id="u_img" src="__UPLOAD__/<?=session('uImg')?>">
+                {else /}请登录
+            {/if}
+        </li>
+    </ul>
+   
+</div>
+</nav>
+
+</div>
+</div>
+
+<!-- 1803010136 板块内容 -->        
+<div class="ui centered grid container stackable">
+    <div class="twelve wide column right-side stacked segments">
+        <div class="ui segment topic-index-list pt-1" style="padding: 8px 6px;min-height: 500px;">
+            <div class="content pl-3 pr-3" style="padding-top: 6px;">
+                <!-- 模块导航 -->
+                <div class="ui secondary menu small mb-0 pb-0 topic-nav" style="min-height: 30px;">
+                    <a href="" class="ui item popover active" >活跃</a>
+                    <a href="" class="ui item pull-right " >最新</a>
+                    <a href="" class="ui item pull-right " >周榜</a>
+                    <a href="" class="ui item pull-right " >月榜</a>
+                    <a href="" class="ui item pull-right " >年榜</a>
+                    <a href="" class="ui item popover " >翻译</a>
+                    <a href="" class="ui item popover " > 招聘</a>
+                    <a href="" class="ui item popover " >问答</a>
+                    <a href="" class="ui item popover " >链接</a>
+                    <a href="" class="ui item popover" >周刊</a>
+                    <!-- 过滤设置 -->
+                    <div style="order:2;margin-left: auto;font-size:0.8em;padding-top: 5px;">
+                        <div class="ui basic simple icon dropdown button shadow-none  tiny hide-on-mobile" style="padding: .28571429em;">
+                            <i class="sort icon"></i>
+                            <span class="text"></span>
+                            <div class="menu bg-white border-left border-right">
+                                <h3 class="header fs-small bg-white border-left border-right">
+                                    请选择排序方式
+                                </h3>
+                                <div class="ui divider bg-white border-left border-right"></div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="ui basic simple icon dropdown button shadow-none  tiny hide-on-mobile" style="padding: .28571429em;">
+                            <i class="filter icon"></i>
+                            
+                            <span class="text"></span>
+                            <div class="menu ">
+                                <h3 class="header fs-small bg-white border-left border-right">
+                                    请选择过滤方式
+                                </h3>
+                                <div class="ui divider bg-white border-left border-right"></div>
+
+                            </div>
+                        </div>
+
+                        <div class="ui basic simple icon dropdown button shadow-none  tiny hide-on-mobile" style="padding: .28571429em;">
+                            <i class="settings icon"></i>
+
+                            <div class="menu ">
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+                <div class="ui divider mb-1 topic-index-divider" style="    border-top: none;border-bottom: 1px solid rgb(219, 224, 226);margin-top: 6px;margin-bottom:0;"></div>
+                <!-- 帖子 -->
+                <div class="simple topic-list rm-link-color mt-0">
+                    <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                        <div class="image-44 user-avatar">
+                            <a href="{:url('index/view')}" class="rm-tdu" target="">
+                                <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="__IMG__/laravel.png"/>
+                            </a>
+                        </div>
+
+                        <div class="category-name hide-on-mobile ">
+                            <span class="hide-on-mobile ui label status small yellow">置顶</span>
+                        </div>
+
+                        <a class="topic-title-wrap rm-tdu" href="https://learnku.com/docs/guide/administrator/4485" target="_blank">
+                            <span class="topic-title">
+                                版主招募中~ 邀您与 Laravel China 社区一同成长
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                        <div class="image-44 user-avatar">
+                            <a href="https://learnku.com/laravel/t/47634" class="rm-tdu" target="">
+                                <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="__IMG__/author.png"/>
+                            </a>
+                        </div>
+
+                        <div class="category-name hide-on-mobile ">
+                            <span class="hide-on-mobile ui label status small yellow">
+                                公告
+                            </span>
+                        </div>
+
+                        <a class="topic-title-wrap rm-tdu" href="https://learnku.com/laravel/t/47634" target="">
+                            <span class="topic-title">
+
+                                实战课程发布 —— 《L07 Laravel TDD 测试入门》    
+                            </span>
+                            <span class=" hide-on-mobile simple-topic-meta">
+                               <span class="count_set" style="font-size:13px">
+                                   <span class="count_of_replies ui popover" title="点赞 39 + 评论 32 + 收藏 1">
+                                    <i class="icon empty star" style="color:#"></i>72
+                                </span>
+                                <span class="count_seperator">|</span>
+                                <span title="2020-09-30 11:47:44" class="timeago">1天前</span>
+                            </span>
+                        </span>
+                    </a>
+                </div>
+                {volist name="mes" id="mesItem"}
+                        <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                            <div class="image-44 user-avatar">
+                                <a href="https://learnku.com/laravel/t/47634" class="rm-tdu" target="">
+                                    <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="__IMG__/author.png"/>
+                                </a>
+                            </div>
+
+                            <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small">
+                                    {$mesItem.m_type}
+                                </span>
+                            </div>
+
+                            <a class="topic-title-wrap rm-tdu" href="https://learnku.com/laravel/t/47634" target="">
+                                <span class="topic-title">
+                                    {$mesItem.m_title}    
+                                </span>
+                                <span class=" hide-on-mobile simple-topic-meta">
+                                <span class="username">{$mesItem.u_nick}</span>
+                                   <span class="count_set" style="font-size:13px">
+                                       <span class="count_of_replies ui popover" title="点赞 39 + 评论 32 + 收藏 1">
+                                        <i class="icon empty star" style="color:#"></i>72
+                                    </span>
+                                    <span class="count_seperator">|</span>
+                                    <span title="{$mesItem.m_createat|date='Y-m-d H:i:s'}" class="timeago">{$mesItem.m_createat|dateInit}</span>
+                                </span>
+                                </span>
+                        </a>
+                    </div>
+                {/volist}
+                </div>
+
+                <!-- 帖子结束 -->
+
+                <!-- 帖子导航栏 -->
+                <nav style="position: relative;">
+                    <ul class="pagination">
+                        <li class="page-item disabled" aria-disabled="true" aria-label="« 上一页">
+                            <span class="page-link" aria-hidden="true">‹</span>
+                        </li>
+                        <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
+                        <li class="page-item"><a class="page-link" href="">2</a></li>
+                        <li class="page-item"><a class="page-link" href="">3</a></li>
+                        <li class="page-item"><a class="page-link" href="">4</a></li>
+                        <li class="page-item"><a class="page-link" href="">5</a></li>
+                        <li class="page-item"><a class="page-link" href="">6</a></li>
+                        <li class="page-item"><a class="page-link" href="">7</a></li>
+                        <li class="page-item"><a class="page-link" href="">8</a></li>
+                        <li class="page-item disabled" aria-disabled="true"><span class="page-link">...</span></li>
+                        <li class="page-item"><a class="page-link" href="">30</a></li>
+                        <li class="page-item"><a class="page-link" href="">31</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="https://learnku.com/laravel?page=2" rel="next" aria-label="下一页 »">›</a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- 帖子导航栏结束 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 右侧栏 -->
+    <div class="four wide column stackable ">
+
+        <div class="item header sidebar">
+            <div class="ui card top-color responsive community-details">
+                <div class="content">
+                  <div class="header">
+                    <img class="ui image" style="width:22px;height:22px;margin-top:-2px;" src="__IMG__/laravel.png"> <span class="ml-2">Laravel China 社区</span>  
+                  </div>
+              </div>
+
+              <div class="content main pb-2 pt-3">
+                  <div class="ui middle aligned list pb-1" style="line-height: 22px;">
+                    <div>
+                        Laravel 是优雅的 PHP Web 开发框架。具有高效、简洁、富于表达力等优点。采用 MVC 设计，是崇尚开发效率的全栈框架。是最受关注的 PHP 框架。
+
+                        <a href="https://learnku.com/laravel/wikis/7227" class="ml-1 text-decoration-underline text-mute fs-tiny">社区指南</a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="extra content">
+                <div class="ui centered grid" style="margin-top: 0px;">
+                    <div class="eight wide column pr-1 pt-0">
+                        <button class="ui primary fluid button  small login_required basic" style="width:115px;">
+                         <i class="icon plus"></i> <span class="state">加入社区</span>
+                     </button>
+                 </div>
+
+                 <div class="eight wide column pl-1 pt-0">
+                    <button class="ui primary button fluid small login_required basic">
+                        <i class="icon paint brush"></i> <a style="color:#f4645f" href="post.html">发 帖</a>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ui card responsive">
+        <button class="ui primary button fluid subscribe-weekly-email community login_required popover" title="周一会发送上一周精华内容的邮件" style="" data-act="subscribe" data-id="1">
+            <i class="icon envelope"></i>
+            <span class="state"> 订阅 Laravel 周刊</span>
+        </button>
+    </div>
+
+    <div class="ui card responsive top-color community-rules">
+      <div class="content">
+        <div class="header">
+            <i class="icon checkmark box"></i> Laravel 社区规范
+        </div>
+    </div>
+    <div class="content main py-0 pb-2">
+        <div class="ui styled fluid accordion border-0 shadow-none">
+          <div class=" title px-0">
+            1. 只发 Laravel 相关内容
+        </div>
+        <div class=" title px-0">
+            2. 请保持友善
+        </div>
+    </div>
+</div>
+
+</div>                
+</div>
+            </div>
+        </div>
+</div>
+<!-- 底部 -->
+<div class="ui inverted vertical footer segment" style="margin-top:30px;">
+    <div class="ui center aligned container">
+        <div class="ui stackable inverted divided grid">
+            <div class="four wide column">
+                <h4 class="ui inverted header">
+                    <img src="__IMG__/icon2.png" alt="" style="width: 32px;border-radius: 6px;position: relative;top: -5px;">
+                    关于 LearnKu
+                </h4>
+                <div class="ui inverted  text-center">
+                    <div class="lh-3">LearnKu 是终身编程者的修道场</div>
+                    <div class="lh-3">摒弃世俗浮躁，追求技术精湛</div>
+                </div>
+
+                <div class="ui inverted  text-center mt-3 rm-link-color tdu">
+                    <i class="icon birthday"></i> <a href="https://learnku.com/articles/28735" >LearnKu 诞生的故事</a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header">资源推荐</h4>
+                <div class="ui inverted link list">
+                    <li class="mb-1">
+                        <a class="item" href="https://learnku.com/docs/guide">
+                            《社区使用指南》
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="item" href="https://learnku.com/docs/writing-docs">
+                            《文档撰写指南》
+                        </a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="item" href="https://learnku.com/docs/guide/protocol/4992">
+                            《LearnKu 社区规范》
+                        </a>
+                    </li>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header">赞助商</h4>
+                <div class="ui inverted link list">
+                    <a href="https://passport.ucloud.cn/?invitation_code=rami45zj5kpm&amp;ytag=reZ5E7" rel="nofollow noopener noreferrer" class="item" target="_blank" style="line-height: 28px;">
+                        <img src="__IMG__/sponsor1.png" title="本站服务器由 UCloud 赞助" class="ui popover" style="height: 20px;margin-bottom: -4px;margin-right: 3px;display: inline-block;">
+                    </a>
+                    <a href="https://www.upyun.com/" rel="nofollow noopener noreferrer" class="item" target="_blank" style="line-height: 28px;">
+                        <img src="__IMG__/sponsor2.png" title="社区 CDN 赞助商" class="ui popover" style="height: 20px;margin-bottom: -4px;margin-right: 3px;display: inline-block;">
+                    </a>
+                    <a href="http://www.sendcloud.net/" rel="nofollow noopener noreferrer" class="item" target="_blank" style="line-height: 28px;">
+                        <img src="__IMG__/sponsor3.png" title="订阅邮件赞助商：SendCloud" class="ui popover" style="height: 20px;margin-bottom: -4px;margin-right: 3px;display: inline-block;">
+                    </a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header">其他信息</h4>
+                <div class="ui inverted link list">
+
+                    <li>
+                        <a class="item" href="https://learnku.com/contact?code=outsource">
+                            <i class="icon thumbs up"></i> 软件外包
+                        </a>
+                    </li>
+                    <li>
+                        <a class="item" href="https://learnku.com/docs/guide/administrator/4485" >
+                            <i class="icon heartbeat"></i> 成为版主
+                        </a>
+                    </li>
+                    <li>
+                        <a class="item" href="https://learnku.com/quizzes" >
+                            <i class="icon wpforms"></i> 所有测验
+                        </a>
+                    </li>
+                    <li>
+                        <a class="item" href="https://learnku.com/contact">
+                            <i class="icon wechat" aria-hidden="true" ></i> 联系站长（反馈建议）
+                        </a>
+                    </li>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui inverted section divider"></div>
+        <div style="color: rgb(137, 137, 140);font-size:0.9em;"  class="rm-link-color">
+            <p>
+                <a href="http://beian.miit.gov.cn/" target="_blank">粤ICP备18099781号-6</a>
+                <span class="mx-2">|</span>
+                <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502004330" target="_blank"><img src="__IMG__/copyright.png" width="20" style="position: relative;top: 4px;"> 粤公网安备 44030502004330号</a>
+                <span class="mx-2">|</span>
+                <a href="https://learnku.com/lk">违法和不良信息举报</a>
+            </p>
+            <p style=" margin-top:-8px;margin-bottom: -0px;" class="ui inverted signature">
+              由 <a href="https://learnku.com/contact" target="_blank" style="color: inherit;">Summer</a> 设计和编码 <span style="color: #e27575;font-size: 14px;">❤</span>
+          </p>
+      </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    let forumPage = document.querySelector('#forumPage')
+    let setList = document.querySelector('.setList')
+    forumPage.onmouseover = function(){
+        setList.style.display = 'flex'
+    }
+    forumPage.onmouseout = function(){
+        setList.style.display = 'none'
+    }
+</script>
+</body>
+
+</html>

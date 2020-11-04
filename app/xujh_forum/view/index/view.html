@@ -310,7 +310,7 @@
                         <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
                             <div class="image-44 user-avatar">
                                 <a href="https://learnku.com/laravel/t/47634" class="rm-tdu" target="">
-                                    <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="__IMG__/author.png"/>
+                                    <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="__UPLOAD__/{$mesItem.u_img}"/>
                                 </a>
                             </div>
 
@@ -320,7 +320,7 @@
                                 </span>
                             </div>
 
-                            <a class="topic-title-wrap rm-tdu" href="https://learnku.com/laravel/t/47634" target="">
+                            <a class="topic-title-wrap rm-tdu" href="{:url('index/detail',['mid'=>$mesItem.m_id])}" target="">
                                 <span class="topic-title">
                                     {$mesItem.m_title}    
                                 </span>

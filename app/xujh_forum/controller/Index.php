@@ -22,11 +22,18 @@ class index extends BaseController
     {
         // $this->check();
         // 查询帖子
-        $mes = Db::name("mes")
+        // $mes = Db::name("mes")
+        //     ->where("s_id", 1)
+        //     ->order("m_createat", 'desc')
+        //     ->order("m_id")
+        //     ->field('m_id,m_title,m_type,m_createat,u_nick,s_id')
+        //     ->select();
+        $mes = Db::view('mes')
+            ->view('user', 'u_img', 'mes.u_nick=user.u_nick')
             ->where("s_id", 1)
             ->order("m_createat", 'desc')
             ->order("m_id")
-            ->field('m_id,m_title,m_type,m_createat,u_nick')
+            ->field('m_id,m_title,m_type,m_createat,s_id,u_img')
             ->select();
         // 查询模块
         $section = Db::name("section")
@@ -41,10 +48,22 @@ class index extends BaseController
     // 1803010136 2类方法 渲染帖子详情页面
     public function detail()
     {
-        $this->check();
         $section = $this->getSection();
-        return view("", ["section" => $section]);
+        $mid = input("mid");
+        $mes = Db::view('mes', 'm_id,m_title,m_content,m_createat,u_nick')
+            ->view('user', 'u_img', 'mes.u_nick=user.u_nick')
+            ->view('section', 's_name', 'mes.s_id=section.s_id')
+            ->where('m_id', input("mid"))
+            ->find();
+        $res = Db::view('res', 'r_content,r_createat,m_id,u_nick')
+            ->view('user', 'u_nick,u_img', 'res.u_nick=user.u_nick')
+            ->view('mes', 'm_id', 'res.m_id=mes.m_id')
+            ->where('mes.m_id', $mid)
+            ->select();
+        // print_r($res);
+        return view("", ["section" => $section, "mes" => $mes, "res" => $res]);
     }
+
     // 1803010136 2类方法 渲染发帖页面
     public function getSection()
     {
@@ -106,7 +125,25 @@ class index extends BaseController
     // 1803010136 1类方法 处理用户回帖
     public function doRes()
     {
-        $this->success('回帖成功');
+        $this->check();
+        $res = [
+            'r_content' => input('r_content'),
+            'u_nick' => session('name'),
+            'r_createat' => time(),
+            'm_id' => input('m_id')
+        ];
+        $response = Db::connect('mysqladmin')
+            ->name("res")
+            ->insert($res);
+
+        // 判断写入成果
+        if ($response == 1) {
+            // 成功
+            $this->success("发帖成功!");
+        } else {
+            // 失败
+            $this->error("发帖失败!");
+        }
     }
     // 1803010136 1类方法 处理用户修改密码
     public function doChangePa()
@@ -122,7 +159,7 @@ class index extends BaseController
         // 验证文件是否符合要求
         try {
             $info = validate(['file' => [
-                'fileSize' => 102400,
+                'fileSize' => 1024000,
                 'fileExt' => 'jpg,png,jpeg',
             ]])->check(['file' => $file]);
         } catch (\think\exception\ValidateException $e) {
@@ -131,8 +168,6 @@ class index extends BaseController
         }
         // 文件存储到硬盘
         $saveName = Filesystem::disk("public")->putFile('upload', $file);
-        echo $saveName;
-        return;
         // 查询并存储旧头像
         $res =  Db::connect('mysql')
             ->name("user")

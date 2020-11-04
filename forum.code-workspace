@@ -10,5 +10,7 @@
 		"path": "D:\\AppServ\\www\\36xujh"
 	}
 ],
-  "settings": {}
+"settings": {
+	"liveServer.settings.multiRootWorkspaceName": "xujh_forum"
+}
 }

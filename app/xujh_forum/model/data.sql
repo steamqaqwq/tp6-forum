@@ -28,7 +28,7 @@ values
 	("title3",1237876,1,'博客','user3');
 -- 1803010136 创建回复信息表
 create table xujh_res(
-	r_id int primary key not null,
+	r_id int primary key  AUTO_INCREMENT not null,
 	r_content text not null,
 	u_nick varchar(10) not null,
 	r_createat int not null,

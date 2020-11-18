@@ -159,8 +159,8 @@
         <nav class="ui main borderless menu top" id="topnav">
             <div class="ui container" style="height:40px">
                 <div class="item">
-                    <img class="ui image" style="width:26px;height:26px;margin-top:-2px;" src="__IMG__/laravel.png">
-                    <span class="site-name ml-2 ">Laravel</span>
+                    <img class="ui image" style="width:26px;height:26px;margin-top:-2px;" src="__IMG__/{$curSection["s_pic"]}">
+                    <span class="site-name ml-2 ">{$curSection["s_name"]}</span>
                 </div>
 
         <form class="ui fluid category search item secondary hide-on-991" action="https://learnku.com/search" method="GET">
@@ -175,8 +175,9 @@
         <li><a href="{:url('index/index')}" class="item secondary">首页</a></li>
         <li id = "forumPage"> <a   href="{:url('index/view')}" class="item secondary">论坛</a>
             <ul class = 'setList'>
+                <li><a href="{:url('index/view')}">All</a></li>
                 {volist name="section" id="sectionItem"}
-                    <li><a href="{:url('index/view')}">{$sectionItem.s_name}</a></li>
+                    <li><a href="{:url('index/view',['sid'=>$sectionItem.s_id])}">{$sectionItem.s_name}</a></li>
                 {/volist}
             </ul>
         </li>
@@ -272,7 +273,7 @@
 
                         <a class="topic-title-wrap rm-tdu" href="https://learnku.com/docs/guide/administrator/4485" target="_blank">
                             <span class="topic-title">
-                                版主招募中~ 邀您与 Laravel China 社区一同成长
+                                版主招募中~ 邀您与 {$curSection["s_name"]} 社区一同成长
                             </span>
                         </a>
                     </div>
@@ -375,7 +376,7 @@
             <div class="ui card top-color responsive community-details">
                 <div class="content">
                   <div class="header">
-                    <img class="ui image" style="width:22px;height:22px;margin-top:-2px;" src="__IMG__/laravel.png"> <span class="ml-2">Laravel China 社区</span>  
+                    <img class="ui image" style="width:22px;height:22px;margin-top:-2px;" src="__IMG__/{$curSection["s_pic"]}"> <span class="ml-2">{$curSection["s_name"]} 社区</span>  
                   </div>
               </div>
 
@@ -412,20 +413,20 @@
     <div class="ui card responsive">
         <button class="ui primary button fluid subscribe-weekly-email community login_required popover" title="周一会发送上一周精华内容的邮件" style="" data-act="subscribe" data-id="1">
             <i class="icon envelope"></i>
-            <span class="state"> 订阅 Laravel 周刊</span>
+            <span class="state"> 订阅 {$curSection["s_name"]} 周刊</span>
         </button>
     </div>
 
     <div class="ui card responsive top-color community-rules">
       <div class="content">
         <div class="header">
-            <i class="icon checkmark box"></i> Laravel 社区规范
+            <i class="icon checkmark box"></i> {$curSection["s_name"]} 社区规范
         </div>
     </div>
     <div class="content main py-0 pb-2">
         <div class="ui styled fluid accordion border-0 shadow-none">
           <div class=" title px-0">
-            1. 只发 Laravel 相关内容
+            1. 只发 {$curSection["s_name"]} 相关内容
         </div>
         <div class=" title px-0">
             2. 请保持友善

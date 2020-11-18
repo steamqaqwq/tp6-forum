@@ -18,7 +18,7 @@ class index extends BaseController
         return view();
     }
     // 1803010136 2类方法 渲染帖子列表页面
-    public function view()
+    public function view($sid = -1)
     {
         // $this->check();
         // 查询帖子
@@ -27,33 +27,39 @@ class index extends BaseController
         //     ->order("m_createat", 'desc')
         //     ->order("m_id")
         //     ->field('m_id,m_title,m_type,m_createat,u_nick,s_id')
-        //     ->select();
+        //     ->select();  
+        $this->checkSid($sid);
         $mes = Db::view('mes')
             ->view('user', 'u_img', 'mes.u_nick=user.u_nick')
-            ->where("s_id", 1)
+            ->where("s_id", $sid)
             ->order("m_createat", 'desc')
             ->order("m_id")
             ->field('m_id,m_title,m_type,m_createat,s_id,u_img')
             ->select();
         // 查询模块
-        $section = Db::name("section")
-            ->order("s_id")
-            ->field('s_name')
-            ->select();
+        $section = $this->getSection();
         // 打印查询结果
         // echo '<pre>';
         // print_r($mes);
-        return view("", ["mes" => $mes, "section" => $section]);
+        // $sectionCur = $section.forEach((item)=>{
+        //     echo item;
+        // });
+        foreach ($section as $key => $value) {
+            if ($value["s_id"] == $sid) {
+                $curSection = $value;
+            }
+        }
+        return view("", ["mes" => $mes, "section" => $section, "curSection" => $curSection]);
     }
     // 1803010136 2类方法 渲染帖子详情页面
-    public function detail()
+    public function detail($mid = -1)
     {
+        $this->checkMid($mid);
         $section = $this->getSection();
-        $mid = input("mid");
         $mes = Db::view('mes', 'm_id,m_title,m_content,m_createat,u_nick')
             ->view('user', 'u_img', 'mes.u_nick=user.u_nick')
             ->view('section', 's_name', 'mes.s_id=section.s_id')
-            ->where('m_id', input("mid"))
+            ->where('m_id', $mid)
             ->find();
         $res = Db::view('res', 'r_content,r_createat,m_id,u_nick')
             ->view('user', 'u_nick,u_img', 'res.u_nick=user.u_nick')
@@ -63,18 +69,16 @@ class index extends BaseController
         // print_r($res);
         return view("", ["section" => $section, "mes" => $mes, "res" => $res]);
     }
-
     // 1803010136 2类方法 渲染发帖页面
     public function getSection()
     {
         // $this->check();
         $section = Db::name("section")
             ->order("s_id")
-            ->field('s_name,s_pic')
+            ->field('s_name,s_pic,s_id')
             ->select();
         return $section;
     }
-
     public function post()
     {
         $this->check();
@@ -123,14 +127,15 @@ class index extends BaseController
         }
     }
     // 1803010136 1类方法 处理用户回帖
-    public function doRes()
+    public function doRes($m_id = -1)
     {
         $this->check();
+        $this->checkMid($m_id);
         $res = [
             'r_content' => input('r_content'),
             'u_nick' => session('name'),
             'r_createat' => time(),
-            'm_id' => input('m_id')
+            'm_id' => $m_id
         ];
         $response = Db::connect('mysqladmin')
             ->name("res")
@@ -218,6 +223,46 @@ class index extends BaseController
     {
         if (!session('name')) {
             $this->error("未登录拒绝访问", 'index/index');
+        }
+    }
+    // 1803010136 1类方法 检查mid值是否合法
+    public function checkMid($mid = -1)
+    {
+        // mid 为空则使用了默认值
+        if ($mid == -1) {
+            $this->error("错误!!", "view");
+            exit();
+        }
+        // mid 错误 查询数据库 判断mid 是否合法
+        $checkmid = Db::connect("mysql")
+            // ->field("m_id")
+            ->name("mes")
+            ->where("m_id", $mid)
+            ->find();
+        if ($checkmid == null) {
+            $this->error("错误!!请勿修改");
+            exit();
+        }
+    }
+    // 1803010136 1类方法 检查sid值是否合法
+    public function checkSid($sid)
+    {
+        // mid 为空则使用了默认值
+        // echo $sid;
+        // return;
+        if ($sid == -1) {
+            $this->error("错误!!", "view?sid=1");
+            exit();
+        }
+        // sid 错误 查询数据库 判断sid 是否合法
+        $checksid = Db::connect("mysql")
+            ->name("section")
+            // ->field("m_id")
+            ->where("s_id", $sid)
+            ->find();
+        if ($checksid == null) {
+            $this->error("错误!!请勿修改");
+            exit();
         }
     }
 }
